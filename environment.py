@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 from collections import defaultdict
 from enum import IntEnum
+from collections import deque
 
 class Environment:
 
@@ -36,7 +37,7 @@ class Environment:
     def is_clear(self,x:int,y:int)->bool:
         if (x<0 or y<0 or y>=self.height or x>=self.width) :
             return False
-        if self.grid[y][x]==Environment.State.OBSTACLE:
+        if self.grid[y][x]==Environment.State.OBSTACLE :
             return False
         else :
             return True
@@ -73,6 +74,7 @@ class Environment:
             return self.grid[y][x]
         else:
             return None
+        
     def print_map(self):
 
         for j in range(self.width):
@@ -91,3 +93,20 @@ class Environment:
                     print("🎁",end="")
                 if(i==self.height-1):
                     print()
+    def find_charge(self,x_s:int,y_s:int)->tuple[int,int] | None:
+        queue=deque()
+        for itr1,itr2 in self.get_neighbours(x_s,y_s):
+            queue.append((itr2,itr1))
+        visited={(x_s,y_s)}
+        while queue:
+            (x,y)=queue.popleft()
+            if(self.get_field(x,y)==Environment.State.CHARGING):
+                return (x,y)
+            if(not self.is_clear(x,y) or (x,y) in visited):
+                continue
+            visited.add((x,y))
+            for (itr2,itr1) in self.get_neighbours(x,y):
+                if(self.get_field(itr1,itr2)!=Environment.State.OBSTACLE and
+                   (itr1,itr2) not in visited):
+                    queue.append((itr1,itr2))
+        return None

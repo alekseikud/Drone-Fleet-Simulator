@@ -2,6 +2,7 @@ from environment import Environment
 from mission import Mission
 from drone import Drone
 from enum import IntEnum
+from mission import Charging_Mission
 
 class RoutingStrategy:
 
@@ -50,8 +51,6 @@ class RoutingStrategy:
         next_layer=[]
         for (x,y) in current_layer:
             for(ny,nx) in Environment.get_neighbours(env,x,y):
-                if(nx==3 and ny==4):
-                    print(f"Clear={Environment.is_clear(env,nx,ny)} and visited: {(nx,ny) in visited}")
                 if(Environment.is_clear(env,nx,ny) and not ((nx,ny) in visited)):
                     visited.add((nx,ny))
                     predecessor[(nx,ny)]=(x,y)

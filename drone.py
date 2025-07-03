@@ -24,19 +24,24 @@ class Drone:
     def assign_mission(self,env:Environment,mis):
         from routing_strategy import RoutingStrategy
         from mission import Mission
-        if(not env.is_clear(mis.x,mis.y) or mis.capacity>self.capacity):
-            raise ValueError("Target coordinate has an OBSTACLE")
+        from mission import Charging_Mission
+        if(mis.capacity>self.capacity):
+            raise ValueError("Capacity exceed!")
         self.state=Drone.State.IN_MISSION
         self.capacity-=mis.capacity
         self.mission=mis
         a=RoutingStrategy()
-        self.steps=a.plan_path(env,self,self.mission)
+        self.steps=a.plan_path(env,self,mis)
 
     def mission_completion(self):
+        from mission import Charging_Mission
         if(self.mission.x!=self.x or self.mission.y!=self.y):
             raise ValueError("Mission is not completed. Target coordinate:"
             "({self.target_x},{self.target_y}), Drone coordinate: ({self.x},{self.y})")
         self.capacity+=self.mission.capacity
         self.mission=None
         self.steps=[]
-        
+        self.state=Drone.State.READY
+        if isinstance(self.mission,Charging_Mission):
+            self.battery=100
+            
