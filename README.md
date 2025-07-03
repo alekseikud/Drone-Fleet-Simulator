@@ -37,10 +37,8 @@ pip install numpy
 1. Clone the repository:
 
    ```bash
-   ```
-
-git clone [https://github.com/your-username/drone-fleet-sim.git](https://github.com/your-username/drone-fleet-sim.git)
-cd drone-fleet-sim
+   ```git clone [https://github.com/your-username/drone-fleet-sim.git](https://github.com/your-username/drone-fleet-sim.git)
+      cd drone-fleet-sim
 
 ````
 2. Prepare a map JSON in `parameters.json` or use the provided examples.
