@@ -21,27 +21,15 @@ Simulate an autonomous fleet of drones operating in a 2D grid environment with o
 
 ## Getting Started
 
-### Prerequisites
-
-* Python 3.8+
-* NumPy
-
-Install dependencies:
-
-```bash
-pip install numpy
-```
-
 ### Installation
 
 1. Clone the repository:
 
    ```bash
-   ```git clone [https://github.com/your-username/drone-fleet-sim.git](https://github.com/your-username/drone-fleet-sim.git)
-      cd drone-fleet-sim
-
-````
-2. Prepare a map JSON in `parameters.json` or use the provided examples.
+   git clone https://github.com/your-username/drone-fleet-sim.git
+   cd drone-fleet-sim
+   ```
+2. Prepare a map JSON in `parameters.json`, or use one of the provided example files.
 
 ### Usage
 
@@ -49,9 +37,7 @@ Run the main script:
 
 ```bash
 python main.py
-````
-
-This will load the map, spawn drones and missions, and run a step-by-step simulation, printing the grid to the console.
+```
 
 ## Project Structure
 
